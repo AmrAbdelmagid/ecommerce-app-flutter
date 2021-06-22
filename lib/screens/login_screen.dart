@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4.0),
                   ),
                   child: Text(
-                    'Login',
+                    'LOGIN',
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                           color: Colors.white,
                           fontFamily: 'Blueberry Sans',
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text('don\'t have an account?'),
                     TextButton(
-                      child: Text('Register'),
+                      child: Text('REGISTER'),
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(RegisterScreen.routeName);
