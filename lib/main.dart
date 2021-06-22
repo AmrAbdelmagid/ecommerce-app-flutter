@@ -1,5 +1,6 @@
 import 'package:ecommmerce_app/screens/login_screen.dart';
 import 'package:ecommmerce_app/screens/on_boarding_screen.dart';
+import 'package:ecommmerce_app/screens/register_screen.dart';
 import 'package:ecommmerce_app/shared/utils/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       home: OnBoardingScreen(),
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
+        RegisterScreen.routeName: (context) => RegisterScreen(),
       },
     );
   }
