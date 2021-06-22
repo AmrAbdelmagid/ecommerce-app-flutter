@@ -60,18 +60,22 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Schyler
+    - family: Blueberry Sans
       fonts:
          - asset: assets/fonts/BlueberrySans-ExtraBold.otf
+           weight: 900
          - asset: assets/fonts/BlueberrySans-Bold.otf
+           weight: 700
          - asset: assets/fonts/BlueberrySans-Medium.otf
+           weight: 500
          - asset: assets/fonts/BlueberrySans-Regular.otf
+           weight: 400
          - asset: assets/fonts/BlueberrySans-light.otf
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+           weight: 300
+
+#    - family: Caveat
+#      fonts:
+#          - asset: fonts/Caveat-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
