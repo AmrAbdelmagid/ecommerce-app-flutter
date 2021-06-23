@@ -13,3 +13,5 @@ class LoginErrorState extends AppStates {
 }
 
 class LoginLoadingState extends AppStates {}
+
+class LoginPasswordVisibilityState extends AppStates {}

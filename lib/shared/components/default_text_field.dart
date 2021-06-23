@@ -5,31 +5,42 @@ class DefaultTextFormField extends StatelessWidget {
   final String label;
   final IconData? prefixIconData;
   final IconData? suffixIconData;
+  final TextInputType? textInputType;
+  final bool isPassword;
   final String? Function(String?)? validator;
-  final VoidCallback? function;
+  final String? Function(String?)? submit;
+  final VoidCallback? changeVisibilityFunction;
+  final FocusNode? focusNode;
 
-  DefaultTextFormField(
-      {this.controller,
-      required this.label,
-       required this.validator,
-      this.prefixIconData,
-      this.suffixIconData,
-      this.function});
+  DefaultTextFormField({this.controller,
+    required this.label,
+    required this.validator,
+    this.prefixIconData,
+    this.suffixIconData,
+    this.textInputType,
+    this.focusNode,
+    this.submit,
+    this.isPassword = false,
+    this.changeVisibilityFunction});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       validator: validator,
+      focusNode: focusNode ,
+      keyboardType: textInputType,
+      obscureText: isPassword,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: label,
         prefixIcon: Icon(prefixIconData),
         suffixIcon: IconButton(
           icon: Icon(suffixIconData),
-          onPressed: function,
+          onPressed: changeVisibilityFunction,
         ),
       ),
+      onFieldSubmitted: submit,
     );
   }
 }
