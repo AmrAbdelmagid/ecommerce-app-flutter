@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ecommmerce_app/layouts/shop_layout.dart';
 import 'package:ecommmerce_app/screens/login_screen.dart';
 import 'package:ecommmerce_app/screens/on_boarding_screen.dart';
 import 'package:ecommmerce_app/screens/register_screen.dart';
@@ -14,13 +15,27 @@ Future<void> main() async {
   DioHelper.init();
   await CacheHelper.initCache();
   bool boardingShowed = CacheHelper.getData(key: 'OnBoarding') ?? false;
-  runApp(MyApp(boardingShowed));
+  String? token = CacheHelper.getData(key: 'token');
+  Widget initialScreen;
+
+  if (boardingShowed)
+    {
+      if (token != null){
+        initialScreen = ShopLayout();
+      } else {
+        initialScreen = LoginScreen();
+      }
+    } else {
+    initialScreen = OnBoardingScreen();
+  }
+
+  runApp(MyApp(initialScreen));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  final bool boardingShowed;
-  MyApp(this.boardingShowed);
+  final Widget initialWidget;
+  MyApp(this.initialWidget);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,10 +43,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       darkTheme: darkTheme,
       theme: lightTheme,
-      home: boardingShowed ? LoginScreen() : OnBoardingScreen(),
+      home: initialWidget,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
+        ShopLayout.routeName: (context) => ShopLayout(),
       },
     );
   }

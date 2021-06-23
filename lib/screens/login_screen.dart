@@ -1,10 +1,11 @@
 import 'dart:developer';
+import 'package:ecommmerce_app/layouts/shop_layout.dart';
 import 'package:ecommmerce_app/shared/components/app_toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ecommmerce_app/screens/register_screen.dart';
 import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit.dart';
 import 'package:ecommmerce_app/shared/bloc/states/states.dart';
 import 'package:ecommmerce_app/shared/components/default_text_field.dart';
+import 'package:ecommmerce_app/shared/helpers/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginSuccessState){
             if (state.loginModel.status!){
-              AppToast.showToastMessage(message: state.loginModel.message!, toastType: ToastType.SUCCESS);
+              CacheHelper.saveData(key: 'token', value: state.loginModel.userDataModel!.token);
+              Navigator.of(context).pushReplacementNamed(ShopLayout.routeName);
             }
             else {
               log(state.loginModel.message!);

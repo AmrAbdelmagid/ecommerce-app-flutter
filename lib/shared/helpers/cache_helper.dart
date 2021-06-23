@@ -20,4 +20,8 @@ class CacheHelper {
   static dynamic getData({required String key}){
     return _prefs!.get(key);
   }
+
+  static Future<bool> removeData({required String key}) async{
+    return await _prefs!.remove(key);
+  }
 }
