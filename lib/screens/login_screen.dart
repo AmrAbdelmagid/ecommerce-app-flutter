@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:ecommmerce_app/shared/components/app_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ecommmerce_app/screens/register_screen.dart';
 import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit.dart';
@@ -39,29 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginSuccessState){
             if (state.loginModel.status!){
-              log(state.loginModel.message!);
-              log(state.loginModel.userDataModel!.token!);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
+              AppToast.showToastMessage(message: state.loginModel.message!, toastType: ToastType.SUCCESS);
             }
             else {
               log(state.loginModel.message!);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
+              AppToast.showToastMessage(message: state.loginModel.message!, toastType: ToastType.ERROR);
             }
           }
         },

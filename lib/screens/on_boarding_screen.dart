@@ -1,5 +1,6 @@
 import 'package:ecommmerce_app/screens/login_screen.dart';
 import 'package:ecommmerce_app/shared/components/on_boarding_item.dart';
+import 'package:ecommmerce_app/shared/helpers/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,8 @@ class OnBoardingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(actions: [
         TextButton(onPressed: (){
-          Navigator.pushReplacementNamed(context,LoginScreen.routeName);
-        }, child: Text('Skip'))
+          onBoardViewed(context);
+        }, child: Text('SKIP'))
       ],),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -67,7 +68,7 @@ class OnBoardingScreen extends StatelessWidget {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast){
-                      Navigator.pushReplacementNamed(context,LoginScreen.routeName);
+                      onBoardViewed(context);
                     }
                     pageViewController.nextPage(
                         duration: Duration(milliseconds: 750),
@@ -85,4 +86,9 @@ class OnBoardingScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+onBoardViewed(BuildContext context){
+  CacheHelper.saveData(key: 'OnBoarding', value: true);
+  Navigator.pushReplacementNamed(context,LoginScreen.routeName);
 }

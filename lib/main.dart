@@ -13,11 +13,14 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.initCache();
-  runApp(MyApp());
+  bool boardingShowed = CacheHelper.getData(key: 'OnBoarding') ?? false;
+  runApp(MyApp(boardingShowed));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final bool boardingShowed;
+  MyApp(this.boardingShowed);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       darkTheme: darkTheme,
       theme: lightTheme,
-      home: OnBoardingScreen(),
+      home: boardingShowed ? LoginScreen() : OnBoardingScreen(),
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
