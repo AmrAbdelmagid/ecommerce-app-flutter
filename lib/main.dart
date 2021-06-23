@@ -3,6 +3,8 @@ import 'package:ecommmerce_app/layouts/shop_layout.dart';
 import 'package:ecommmerce_app/screens/login_screen.dart';
 import 'package:ecommmerce_app/screens/on_boarding_screen.dart';
 import 'package:ecommmerce_app/screens/register_screen.dart';
+import 'package:ecommmerce_app/screens/search_screen.dart';
+import 'package:ecommmerce_app/screens/settings_screen.dart';
 import 'package:ecommmerce_app/shared/helpers/bloc_observer_helper.dart';
 import 'package:ecommmerce_app/shared/helpers/cache_helper.dart';
 import 'package:ecommmerce_app/shared/helpers/dio_helper.dart';
@@ -47,7 +49,8 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
-        ShopLayout.routeName: (context) => ShopLayout(),
+        SettingsScreen.routeName: (context) => SettingsScreen(),
+        SearchScreen.routeName: (context) => SearchScreen(),
       },
     );
   }

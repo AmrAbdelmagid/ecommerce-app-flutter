@@ -4,9 +4,14 @@ import 'package:flutter/services.dart';
 
 var darkTheme = ThemeData(appBarTheme: AppBarTheme(color: Colors.black26));
 var lightTheme = ThemeData(
-  primarySwatch: Colors.deepOrange,
+    primarySwatch: Colors.deepOrange,
     primaryColor: whiteColor,
     scaffoldBackgroundColor: whiteColor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        unselectedLabelStyle: TextStyle(
+            fontFamily: 'Blueberry Sans', fontWeight: FontWeight.w300),
+        selectedLabelStyle: TextStyle(
+            fontFamily: 'Blueberry Sans', fontWeight: FontWeight.w400)),
     appBarTheme: AppBarTheme(
       backwardsCompatibility: false,
       backgroundColor: whiteColor,

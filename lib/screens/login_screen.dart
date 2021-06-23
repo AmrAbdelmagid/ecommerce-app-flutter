@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:ecommmerce_app/layouts/shop_layout.dart';
 import 'package:ecommmerce_app/shared/components/app_toast.dart';
 import 'package:ecommmerce_app/screens/register_screen.dart';
-import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit.dart';
-import 'package:ecommmerce_app/shared/bloc/states/states.dart';
+import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit/login_cubit.dart';
+import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit/login_states.dart';
 import 'package:ecommmerce_app/shared/components/default_text_field.dart';
 import 'package:ecommmerce_app/shared/helpers/cache_helper.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit,AppStates>(
+      child: BlocConsumer<LoginCubit,LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState){
             if (state.loginModel.status!){
