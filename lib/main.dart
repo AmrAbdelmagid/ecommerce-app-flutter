@@ -8,6 +8,7 @@ import 'package:ecommmerce_app/screens/settings_screen.dart';
 import 'package:ecommmerce_app/shared/helpers/bloc_observer_helper.dart';
 import 'package:ecommmerce_app/shared/helpers/cache_helper.dart';
 import 'package:ecommmerce_app/shared/helpers/dio_helper.dart';
+import 'package:ecommmerce_app/shared/utils/constants.dart';
 import 'package:ecommmerce_app/shared/utils/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ Future<void> main() async {
   DioHelper.init();
   await CacheHelper.initCache();
   bool boardingShowed = CacheHelper.getData(key: 'OnBoarding') ?? false;
-  String? token = CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
   Widget initialScreen;
 
   if (boardingShowed)
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         RegisterScreen.routeName: (context) => RegisterScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
         SearchScreen.routeName: (context) => SearchScreen(),
+        ShopLayout.routeName : (context) => ShopLayout(),
       },
     );
   }

@@ -1,12 +1,181 @@
+import 'package:ecommmerce_app/shared/bloc/cubits/shop_cubit/shop_cubit.dart';
+import 'package:ecommmerce_app/shared/bloc/cubits/shop_cubit/shop_states.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text('Products Screen'),
-      ),
+    return BlocConsumer<ShopCubit, ShopStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = ShopCubit.get(context);
+        //var cubitData = myCubit.homeModel!.data;
+        return Center(
+          child: cubit.homeModel != null
+              ? SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      CarouselSlider(
+                        items: cubit.homeModel!.data!.banners
+                            .map(
+                              (banner) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: Stack(
+                                    fit: StackFit.expand,
+                                    children: [
+                                      if (banner.id == 11)
+                                        Container(color: Color(0xff206000)),
+                                      if (banner.id == 12)
+                                        Container(color: Color(0xffEF9D1D)),
+                                      if (banner.id == 13)
+                                        Container(color: Color(0xffF6BDAC)),
+                                      Image(
+                                        image: NetworkImage(banner.image),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        options: CarouselOptions(
+                          initialPage: 0,
+                          autoPlay: true,
+                          autoPlayAnimationDuration: Duration(seconds: 1),
+                          scrollDirection: Axis.horizontal,
+                          height: 200,
+                          enableInfiniteScroll: true,
+                          enlargeCenterPage: true,
+                        ),
+                      ),
+                      Container(
+                        color: Colors.grey.shade300,
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          padding: const EdgeInsets.all(2.0),
+                          mainAxisSpacing: 2.0,
+                          crossAxisSpacing: 2.0,
+                          childAspectRatio: 1 / 1.7,
+                          physics: BouncingScrollPhysics(),
+                          children: List.generate(
+                            cubit.homeModel!.data!.products.length,
+                            (index) =>
+                                Container(
+                              color: Colors.white,
+                              padding: EdgeInsets.all(2.0),
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    alignment: AlignmentDirectional.bottomStart,
+                                    children: [
+                                      Image(
+                                        image: NetworkImage(cubit.homeModel!
+                                            .data!.products[index].image),
+                                        height: 200,
+                                        width: double.infinity,
+                                      ),
+                                      if (cubit.homeModel!.data!.products[index]
+                                              .discount !=
+                                          0)
+                                        Container(
+                                          color: Colors.red,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 4.0, vertical: 2.0),
+                                          child: Text(
+                                            'DISCOUNT',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 10.0),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 95,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            cubit.homeModel!.data!
+                                                .products[index].name,
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                fontFamily: 'Blueberry Sans',
+                                                fontWeight: FontWeight.w500),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Spacer(),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '${(cubit.homeModel!.data!.products[index].price as num).round()} EGP',
+                                                style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 2.0,
+                                              ),
+                                              if (cubit
+                                                      .homeModel!
+                                                      .data!
+                                                      .products[index]
+                                                      .discount !=
+                                                  0)
+                                                Text(
+                                                  '${(cubit.homeModel!.data!.products[index].oldPrice as num).round()} EGP',
+                                                  style: TextStyle(
+                                                    fontSize: 12.0,
+                                                    decoration: TextDecoration
+                                                        .lineThrough,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              Spacer(),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .only(end: 2.0),
+                                                      child: Icon(
+                                                        Icons.favorite_border,
+                                                        size: 24.0,
+                                                      )))
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                ),
+        );
+      },
     );
   }
 }
