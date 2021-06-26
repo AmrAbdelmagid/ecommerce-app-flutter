@@ -43,13 +43,13 @@ class Category {
 }
 
 class ProductModel {
-  int? id;
+  int id = 0;
   String name = '';
   dynamic price;
   dynamic oldPrice;
   dynamic discount;
   String image = '';
-  bool? inFavorites;
+  bool inFavorites = false;
   bool? inCart;
 
   ProductModel.fromJson(Map<String, dynamic> jsonData) {

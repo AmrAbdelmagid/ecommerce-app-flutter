@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:ecommmerce_app/models/login_model.dart';
-import 'package:ecommmerce_app/models/user_data_model.dart';
 import 'package:ecommmerce_app/shared/bloc/cubits/login_cubit/login_states.dart';
 import 'package:ecommmerce_app/shared/helpers/dio_helper.dart';
 import 'package:ecommmerce_app/shared/network/end_points.dart';

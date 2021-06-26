@@ -1,5 +1,6 @@
 import 'package:ecommmerce_app/shared/bloc/cubits/shop_cubit/shop_cubit.dart';
 import 'package:ecommmerce_app/shared/bloc/cubits/shop_cubit/shop_states.dart';
+import 'package:ecommmerce_app/shared/components/app_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,7 +10,13 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is FavoritesProductsSuccessState){
+          if (!state.favoritesCaseModel!.status){
+            AppToast.showToastMessage(message: state.favoritesCaseModel!.message, toastType: ToastType.ERROR);
+          }
+        }
+      },
       builder: (context, state) {
         var cubit = ShopCubit.get(context);
         //var cubitData = myCubit.homeModel!.data;
@@ -211,12 +218,15 @@ class ProductsScreen extends StatelessWidget {
                                                 ),
                                               Spacer(),
                                               GestureDetector(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  cubit.changeFavoriteState(cubit.homeModel!.data!.products[index].id);
+                                                },
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .only(end: 2.0),
                                                   child: Icon(
-                                                    Icons.favorite_border,
+                                                    cubit.favorites[cubit.homeModel!.data!.products[index].id]! ?  Icons.favorite : Icons.favorite_border,
+                                                    color: cubit.favorites[cubit.homeModel!.data!.products[index].id]! ? Colors.red : Colors.black,
                                                     size: 24.0,
                                                   ),
                                                 ),

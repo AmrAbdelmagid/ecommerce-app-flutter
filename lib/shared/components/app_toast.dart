@@ -11,6 +11,7 @@ class AppToast {
   static Future<bool?> showToastMessage({
     required String message,
     required ToastType toastType,
+    Toast toast = Toast.LENGTH_LONG,
   }) async {
     Color chooseColor(ToastType type) {
       Color color;
@@ -29,7 +30,7 @@ class AppToast {
     }
     return await Fluttertoast.showToast(
         msg: message,
-        toastLength: Toast.LENGTH_LONG,
+        toastLength: toast,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 5,
         backgroundColor: chooseColor(toastType),
