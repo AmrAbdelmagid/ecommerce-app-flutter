@@ -18,6 +18,7 @@ class ProductsScreen extends StatelessWidget {
               ? SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CarouselSlider(
                         items: cubit.homeModel!.data!.banners
@@ -54,6 +55,68 @@ class ProductsScreen extends StatelessWidget {
                           enlargeCenterPage: true,
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 2.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Categories',
+                              style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontFamily: 'Blueberry Sans',
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(height: 12.0,),
+                            Container(
+                              height: 100.0,
+                              child: ListView.separated(
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => Stack(
+                                  alignment: Alignment.bottomCenter,
+                                  children: [
+                                    Image(
+                                      image: NetworkImage(
+                                          cubit.categoriesModel!.data!.categoryDataModelList[index].image),
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Container(
+                                      color: Colors.black.withOpacity(.8),
+                                      padding: EdgeInsets.all(4.0),
+                                      width: 100.0,
+                                      child: Text(
+                                        cubit.categoriesModel!.data!.categoryDataModelList[index].name,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Blueberry Sans',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                itemCount: cubit.categoriesModel!.data!.categoryDataModelList.length,
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: 10.0,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 12.0,),
+                            Text(
+                              'New Products',
+                              style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontFamily: 'Blueberry Sans',
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         color: Colors.grey.shade300,
                         child: GridView.count(
@@ -66,8 +129,7 @@ class ProductsScreen extends StatelessWidget {
                           physics: BouncingScrollPhysics(),
                           children: List.generate(
                             cubit.homeModel!.data!.products.length,
-                            (index) =>
-                                Container(
+                            (index) => Container(
                               color: Colors.white,
                               padding: EdgeInsets.all(2.0),
                               child: Column(
@@ -91,8 +153,10 @@ class ProductsScreen extends StatelessWidget {
                                           child: Text(
                                             'DISCOUNT',
                                             style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 10.0),
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                              fontFamily: 'Blueberry Sans',
+                                            ),
                                           ),
                                         ),
                                     ],
@@ -147,15 +211,16 @@ class ProductsScreen extends StatelessWidget {
                                                 ),
                                               Spacer(),
                                               GestureDetector(
-                                                  onTap: () {},
-                                                  child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .only(end: 2.0),
-                                                      child: Icon(
-                                                        Icons.favorite_border,
-                                                        size: 24.0,
-                                                      )))
+                                                onTap: () {},
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .only(end: 2.0),
+                                                  child: Icon(
+                                                    Icons.favorite_border,
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ],
