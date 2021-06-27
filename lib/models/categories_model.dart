@@ -11,17 +11,13 @@ class CategoriesModel {
 }
 
 class CategoriesDataModel{
-
-  int? currentPage;
   List<CategoryDataModel> categoryDataModelList = [];
   CategoriesDataModel.fromJson(Map<String,dynamic> jsonData){
-    currentPage = jsonData['current_page'];
 
     (jsonData['data'] as List).forEach((category) {
       categoryDataModelList.add(CategoryDataModel.fromJson(category));
     });
   }
-
 }
 
 class CategoryDataModel {

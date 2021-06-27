@@ -18,6 +18,7 @@ class SearchScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = SearchCubit.get(context);
+          var shopCubit = ShopCubit.get(context);
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
@@ -33,6 +34,7 @@ class SearchScreen extends StatelessWidget {
                       controller: searchController,
                       submit: (_){
                        cubit.postAndGetSearchData(searchController.text);
+                       shopCubit.getFavorites();
                       },
                     ),
                     SizedBox(height: 20,),
@@ -87,20 +89,22 @@ class SearchScreen extends StatelessWidget {
                                           width: 2.0,
                                         ),
                                         Spacer(),
-                                        // GestureDetector(
-                                        //   onTap: () {
-                                        //     ShopCubit().changeFavoriteState(ShopCubit().favoritesModel!.data!.listData[index].product!.id);
-                                        //   },
-                                        //   child: Padding(
-                                        //     padding: EdgeInsetsDirectional
-                                        //         .only(end: 2.0),
-                                        //     child: Icon(
-                                        //       ShopCubit().favorites[ShopCubit().favoritesModel?.data!.listData[index].product!.id]! ?  Icons.favorite : Icons.favorite_border,
-                                        //       color: ShopCubit().favorites[ShopCubit().favoritesModel?.data!.listData[index].product!.id]! ? Colors.red : Colors.black,
-                                        //       size: 24.0,
-                                        //     ),
-                                        //   ),
-                                        // )
+                                        // if (state is FavoritesProductsSuccessState)
+                                        GestureDetector(
+                                          onTap: () {
+                                            shopCubit.changeFavoriteState(cubit.searchModel!.data!.productsData![index].id);
+                                            cubit.refreshState();
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsetsDirectional
+                                                .only(end: 2.0),
+                                            child: (shopCubit.favorites[cubit.searchModel!.data!.productsData![index].id] == null) ? SizedBox() : Icon(
+                                              shopCubit.favorites[cubit.searchModel!.data!.productsData![index].id ] ?? false ?  Icons.favorite : Icons.favorite_border,
+                                              color: shopCubit.favorites[cubit.searchModel!.data!.productsData![index].id]?? false ? Colors.red : Colors.black,
+                                              size: 24.0,
+                                            ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ],

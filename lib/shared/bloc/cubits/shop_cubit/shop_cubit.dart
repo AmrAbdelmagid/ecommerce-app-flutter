@@ -5,6 +5,7 @@ import 'package:ecommmerce_app/models/favorites_case_model.dart';
 import 'package:ecommmerce_app/models/favorites_model.dart';
 import 'package:ecommmerce_app/models/home_model.dart';
 import 'package:ecommmerce_app/models/login_model.dart';
+import 'package:ecommmerce_app/models/search_model.dart';
 import 'package:ecommmerce_app/screens/categories_screen.dart';
 import 'package:ecommmerce_app/screens/favorites_screen.dart';
 import 'package:ecommmerce_app/screens/products_screen.dart';
@@ -33,9 +34,11 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   HomeModel? homeModel;
-  late CategoriesModel categoriesModel;
+  CategoriesModel? categoriesModel;
   FavoritesCaseModel? favoritesCaseModel;
   FavoritesModel? favoritesModel;
+
+  SearchModel? searchModel;
 
   Map<int, bool> favorites = {0: false};
 
@@ -62,7 +65,7 @@ class ShopCubit extends Cubit<ShopStates> {
   void getCategoriesData() {
     DioHelper.getData(pathUrl: CATEGORIES).then((value) {
       categoriesModel = CategoriesModel.fromJson(value.data);
-      log(categoriesModel.data!.categoryDataModelList[0].name.toString());
+      log(categoriesModel!.data!.categoryDataModelList[0].name.toString());
       emit(CategoriesDataSuccessState());
     }).catchError((error) {
       log(error.toString());
@@ -97,7 +100,10 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(GettingFavoritesProductsSuccessState());
       log('here');
       log(favoritesModel!.data!.listData[0].product!.name.toString());
-    }).catchError((error) {});
+    }).catchError((error) {
+      log(error.toString());
+      emit(GettingFavoritesProductsErrorState());
+    });
   }
 
   void getUserData() {

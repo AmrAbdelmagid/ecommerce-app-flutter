@@ -21,11 +21,11 @@ class CategoriesScreen extends StatelessWidget {
                 height: 100,
                 width: 100,
                 image: NetworkImage(cubit
-                    .categoriesModel.data!.categoryDataModelList[index].image),
+                    .categoriesModel!.data!.categoryDataModelList[index].image),
               ),
               title: Text(
                   cubit
-                      .categoriesModel.data!.categoryDataModelList[index].name,
+                      .categoriesModel!.data!.categoryDataModelList[index].name,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18.0,
@@ -42,7 +42,7 @@ class CategoriesScreen extends StatelessWidget {
               ),
             ),
             itemCount:
-                cubit.categoriesModel.data!.categoryDataModelList.length,
+                cubit.categoriesModel!.data!.categoryDataModelList.length,
           );
         });
   }
