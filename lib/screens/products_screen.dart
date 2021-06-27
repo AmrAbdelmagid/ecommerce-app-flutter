@@ -85,7 +85,7 @@ class ProductsScreen extends StatelessWidget {
                                   children: [
                                     Image(
                                       image: NetworkImage(
-                                          cubit.categoriesModel!.data!.categoryDataModelList[index].image),
+                                          cubit.categoriesModel.data!.categoryDataModelList[index].image),
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.cover,
@@ -95,7 +95,7 @@ class ProductsScreen extends StatelessWidget {
                                       padding: EdgeInsets.all(4.0),
                                       width: 100.0,
                                       child: Text(
-                                        cubit.categoriesModel!.data!.categoryDataModelList[index].name,
+                                        cubit.categoriesModel.data!.categoryDataModelList[index].name,
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -107,7 +107,7 @@ class ProductsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                itemCount: cubit.categoriesModel!.data!.categoryDataModelList.length,
+                                itemCount: cubit.categoriesModel.data!.categoryDataModelList.length,
                                 separatorBuilder: (context, index) => SizedBox(
                                   width: 10.0,
                                 ),

@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   bool isPasswordShown = false;
 
-  LoginModel? loginModel;
+
 
   void changePasswordVisibility() {
     isPasswordShown = !isPasswordShown;
@@ -27,8 +27,8 @@ class LoginCubit extends Cubit<LoginStates> {
       'email': email,
       'password': password,
     }).then((result) {
-      loginModel = LoginModel.fromJson(result.data);
-      emit(LoginSuccessState(loginModel!));
+      LoginModel.authModel = LoginModel.fromJson(result.data);
+      emit(LoginSuccessState(LoginModel.authModel!));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
       log(error.toString());

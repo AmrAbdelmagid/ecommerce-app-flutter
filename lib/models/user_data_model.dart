@@ -1,8 +1,8 @@
 class UserDataModel {
   int? id;
-  String? name;
-  String? email;
-  String? phone;
+  String name = '';
+  String email = '';
+  String phone = '';
   String? image;
   int? point;
   int? credit;

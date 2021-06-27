@@ -4,7 +4,7 @@ class LoginModel{
   bool? status;
   String? message;
   UserDataModel? userDataModel;
-
+  static LoginModel? authModel;
   LoginModel.fromJson(Map<String,dynamic> jsonData){
     status = jsonData['status'];
     message = jsonData['message'];

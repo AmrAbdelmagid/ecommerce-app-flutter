@@ -11,11 +11,13 @@ class DefaultTextFormField extends StatelessWidget {
   final String? Function(String?)? submit;
   final VoidCallback? changeVisibilityFunction;
   final FocusNode? focusNode;
+  final TextStyle? textStyle;
 
   DefaultTextFormField({this.controller,
     required this.label,
     required this.validator,
     this.prefixIconData,
+    this.textStyle,
     this.suffixIconData,
     this.textInputType,
     this.focusNode,
@@ -26,6 +28,7 @@ class DefaultTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: textStyle,
       controller: controller,
       validator: validator,
       focusNode: focusNode ,
