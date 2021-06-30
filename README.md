@@ -1,10 +1,5 @@
 # Shopy App
 
-Technologies used in this application: <br />
-state management: bloc pattern with cubit <br />
-Dio package for managing api requestes <br />
-shared preferences <br />
-
 <img src="https://user-images.githubusercontent.com/52869694/123995153-53f53000-d9ce-11eb-8a4d-79bb15fb3c54.png" width="400" height="750">
 <img src="https://user-images.githubusercontent.com/52869694/123995160-56578a00-d9ce-11eb-8ac7-2f1de51bc922.png" width="400" height="750">
 <img src="https://user-images.githubusercontent.com/52869694/123995164-56f02080-d9ce-11eb-981b-2af1ce34be79.png" width="400" height="750">
